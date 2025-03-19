@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Check for files larger than 1MB
+if find . -type f -size +1M | grep -q .; then
+    echo "ERROR: Your repo contains files larger than 1MB. Remove them before pushing."
+    exit 1
+fi
+
+# Allow push if no large files found
+exit 0

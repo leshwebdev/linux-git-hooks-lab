@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Get the Linux username of the person committing
+USERNAME=$(whoami)
+
+# Prefix the commit message with the username
+sed -i "1s/^/[${USERNAME}] /" "$1"

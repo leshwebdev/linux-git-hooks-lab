@@ -1,0 +1,18 @@
+#!/bin/bash
+
+echo "Merge successful! Running system health checks..."
+
+# Show available disk space
+echo -e "\nDisk Space Usage:"
+df -h | grep -E '^Filesystem|/dev/'
+
+# Show memory usage
+echo -e "\nMemory Usage:"
+free -m
+
+# Show running services
+echo -e "\nRunning Services:"
+systemctl list-units --type=service --state=running | head -20
+
+echo -e "\nSystem health check completed!"
+

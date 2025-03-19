@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Block .log and .tmp files
+if git diff --cached --name-only | grep -E '\.(log|tmp)$' > /dev/null; then
+    echo "❌ ERROR: Commit contains .log or .tmp files. Remove them before committing."
+    exit 1
+fi
+
+# Block "# DEBUG:" comments in .sh files
+if git diff --cached --name-only -- '*.sh' | xargs grep -E '# DEBUG:' > /dev/null; then
+    echo "❌ ERROR: Commit contains '# DEBUG:' comments in shell scripts. Remove them before committing."
+    exit 1
+fi
+
+# Allow commit if checks pass
+exit 0
